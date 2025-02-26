@@ -57,12 +57,12 @@ http://localhost:8000/api/books/{id}
 #### Result Examples :
 ```json
 {
-    "id": 1,
-    "book_name": "Jovan Walter",
-    "description": "Mr. Robin Rath",
-    "category_id": 1,
-    "created_at": "2024-01-21T04:20:39.000000Z",
-    "updated_at": "2024-01-21T04:20:39.000000Z"
+    "id": 9,
+    "title": "post2",
+    "description": "testing proses post1 dengan api",
+    "author": "bintang andika",
+    "created_at": "2025-02-26T02:39:59.000000Z",
+    "updated_at": "2025-02-26T02:39:59.000000Z"
 }
 ```
 ## 🧾 POST Method Example

@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+
+    
     public function index(){
         $books = Book::all();
-        return view('book.index', compact('books'));
+        return $books;
+        // return view('book.index', compact('books'));
     }
-
+    
     public function create(){
-        return view('book.create');
+        return 'OK';
+        // return view('book.create');
     }
-
+    
     public function store(Request $request){
         // dd($request);
         $validasi = $request->validate([
@@ -23,11 +27,22 @@ class BookController extends Controller
             'description' => 'required',
             'author' => 'required',
         ]);
-
-    Book::create($validasi);
-    return redirect()->route('book.index');
+        
+        Book::create($validasi);
+        return ['book'=>$validasi];
+        // return redirect()->route('book.index');
     }
 
+    public function show(Request $request, $id)
+    {
+        $book = Book::find($id);
+        if ($book) {
+            return response()->json($book);
+        } else {
+            return response()->json(['error' => 'Book not found'], 404);
+        }
+    }
+    
     public function edit($id){
         $book = Book::find($id);
         return view('book.edit', compact('book'));
@@ -40,14 +55,15 @@ class BookController extends Controller
             'description' => 'required',
             'author' => 'required',
         ]);
+
         $book->update($validasi);
-        return redirect()->route('book.index');
+        return $book;
 
     }
 
     public function destroy($id){
         $book = Book::find($id);
         $book->delete();
-        return redirect()->route('book.index');
+        return ['message' => 'buku berhasil dihapus'];
     }
 }
